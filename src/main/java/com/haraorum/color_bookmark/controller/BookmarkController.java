@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/bookmark")
 @RequiredArgsConstructor
@@ -23,6 +24,11 @@ public class BookmarkController {
     public ResponseEntity<List<Bookmark>> getAllBookmarks() {
         List<Bookmark> bookmarks = bookmarkService.findAll();
         return new ResponseEntity<>(bookmarks, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Optional<Bookmark>> getBookmark(@PathVariable Long id) {
+        return new ResponseEntity<>(bookmarkService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
