@@ -25,8 +25,9 @@ public class BookmarkService {
         return bookmark;
     }
 
-    public void deleteById(Long id) {
+    public Long deleteById(Long id) {
         bookmarkRepository.deleteById(id);
+        return id;
     }
 
     public Bookmark save(Bookmark bookmark) {

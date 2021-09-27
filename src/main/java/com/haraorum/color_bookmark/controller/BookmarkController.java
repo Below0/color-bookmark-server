@@ -26,7 +26,12 @@ public class BookmarkController {
     }
 
     @PostMapping
-    public ResponseEntity<Bookmark> saveBookmark(@RequestBody Bookmark bookmark) {
+    public ResponseEntity<Bookmark> createBookmark(@RequestBody Bookmark bookmark) {
         return new ResponseEntity<>(bookmarkService.save(bookmark), HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Long> deleteBookmark(@PathVariable Long id) {
+        return new ResponseEntity<>(bookmarkService.deleteById(id), HttpStatus.OK);
     }
 }
