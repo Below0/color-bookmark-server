@@ -4,9 +4,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 
 @Getter
@@ -20,20 +22,18 @@ public class Bookmark implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 값 자동 주입, DB에 키 생성을 위임함
     private long id;
 
-    @Column
-    private String name;
-
-    @Column(length = 6)
+    @Column(length = 6, unique = true)
     private String color;
 
+    @CreationTimestamp
+    private Timestamp createdAt;
+
     @Builder
-    public Bookmark(String name, String color) {
-        this.name = name;
+    public Bookmark(String color) {
         this.color = color;
     }
 
     public void update(Bookmark bookmark) {
-        this.name = bookmark.name;
         this.color = bookmark.color;
     }
 }

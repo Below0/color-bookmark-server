@@ -5,7 +5,6 @@ import com.haraorum.color_bookmark.service.BookmarkService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,9 +25,9 @@ public class BookmarkController {
         return new ResponseEntity<>(bookmarks, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Optional<Bookmark>> getBookmark(@PathVariable Long id) {
-        return new ResponseEntity<>(bookmarkService.findById(id), HttpStatus.OK);
+    @GetMapping(value = "/{color}")
+    public ResponseEntity<Optional<Bookmark>> getBookmark(@PathVariable String color) {
+        return new ResponseEntity<>(bookmarkService.findByColor(color), HttpStatus.OK);
     }
 
     @PostMapping
@@ -36,8 +35,8 @@ public class BookmarkController {
         return new ResponseEntity<>(bookmarkService.save(bookmark), HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Long> deleteBookmark(@PathVariable Long id) {
-        return new ResponseEntity<>(bookmarkService.deleteById(id), HttpStatus.OK);
+    @DeleteMapping(value = "/{color}")
+    public ResponseEntity<String> deleteBookmark(@PathVariable String color) {
+        return new ResponseEntity<>(bookmarkService.deleteByColor(color), HttpStatus.OK);
     }
 }

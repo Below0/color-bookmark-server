@@ -20,14 +20,14 @@ public class BookmarkService {
         return bookmarks;
     }
 
-    public Optional<Bookmark> findById(Long id) {
-        Optional<Bookmark> bookmark = bookmarkRepository.findById(id);
+    public Optional<Bookmark> findByColor(String color) {
+        Optional<Bookmark> bookmark = bookmarkRepository.findBookmarkByColor(color);
         return bookmark;
     }
 
-    public Long deleteById(Long id) {
-        bookmarkRepository.deleteById(id);
-        return id;
+    public String deleteByColor(String color) {
+        bookmarkRepository.deleteBookmarkByColor(color);
+        return color;
     }
 
     public Bookmark save(Bookmark bookmark) {
